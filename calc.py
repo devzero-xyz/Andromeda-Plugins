@@ -98,10 +98,10 @@ def phraseMath(m,modes=""):
     m = m.replace("_","").replace("import","")
     
     #Change double factorials, ie 5!! -> double_fact(5)
-    p = re.compile(ur'(-?\d+)!!'); subst = r"double_fact(\1)"
+    p = re.compile('(-?\d+)!!'); subst = "double_fact(\1)"
     m = re.sub(p, subst, m)
     #Change factorials, ie 5! -> fact(5)
-    p = re.compile(ur'(-?\d+)!'); subst = r"fact(\1)"
+    p = re.compile('(-?\d+)!'); subst = "fact(\1)"
     m = re.sub(p, subst, m)
     
     m = m.replace("||"," or ").replace("|"," or ")
@@ -111,38 +111,38 @@ def phraseMath(m,modes=""):
     #Also npr and stuff
     
     #Converts e notation, ie 2e9 to 2 * 10**9, because errors and stuff
-    p = re.compile(ur'([:]?\d*\.\d+|\d+)e([-+]?)([-+]?\d*\.\d+|\d+)'); subst = r"\1 * 10**\2\3"
+    p = re.compile('([:]?\d*\.\d+|\d+)e([-+]?)([-+]?\d*\.\d+|\d+)'); subst = "\1 * 10**\2\3"
     m = re.sub(p, subst, m)
     
     #Fixes functions
-    p = re.compile(ur'(sin\([^)]*\))'); subst = r"Decimal(\1)"; m = re.sub(p, subst, m)
-    p = re.compile(ur'(cos\([^)]*\))'); subst = r"Decimal(\1)"; m = re.sub(p, subst, m)
-    p = re.compile(ur'(tan\([^)]*\))'); subst = r"Decimal(\1)"; m = re.sub(p, subst, m)
-    p = re.compile(ur'(asin\([^)]*\))'); subst = r"Decimal(\1)"; m = re.sub(p, subst, m)
-    p = re.compile(ur'(acos\([^)]*\))'); subst = r"Decimal(\1)"; m = re.sub(p, subst, m)
-    p = re.compile(ur'(atan\([^)]*\))'); subst = r"Decimal(\1)"; m = re.sub(p, subst, m)
-    p = re.compile(ur'(sinh\([^)]*\))'); subst = r"Decimal(\1)"; m = re.sub(p, subst, m)
-    p = re.compile(ur'(cosh\([^)]*\))'); subst = r"Decimal(\1)"; m = re.sub(p, subst, m)
-    p = re.compile(ur'(tanh\([^)]*\))'); subst = r"Decimal(\1)"; m = re.sub(p, subst, m)
-    p = re.compile(ur'(asinh\([^)]*\))'); subst = r"Decimal(\1)"; m = re.sub(p, subst, m)
-    p = re.compile(ur'(acosh\([^)]*\))'); subst = r"Decimal(\1)"; m = re.sub(p, subst, m)
-    p = re.compile(ur'(atanh\([^)]*\))'); subst = r"Decimal(\1)"; m = re.sub(p, subst, m)
+    p = re.compile('(sin\([^)]*\))'); subst = "Decimal(\1)"; m = re.sub(p, subst, m)
+    p = re.compile('(cos\([^)]*\))'); subst = "Decimal(\1)"; m = re.sub(p, subst, m)
+    p = re.compile('(tan\([^)]*\))'); subst = "Decimal(\1)"; m = re.sub(p, subst, m)
+    p = re.compile('(asin\([^)]*\))'); subst = "Decimal(\1)"; m = re.sub(p, subst, m)
+    p = re.compile('(acos\([^)]*\))'); subst = "Decimal(\1)"; m = re.sub(p, subst, m)
+    p = re.compile('(atan\([^)]*\))'); subst = "Decimal(\1)"; m = re.sub(p, subst, m)
+    p = re.compile('(sinh\([^)]*\))'); subst = "Decimal(\1)"; m = re.sub(p, subst, m)
+    p = re.compile('(cosh\([^)]*\))'); subst = "Decimal(\1)"; m = re.sub(p, subst, m)
+    p = re.compile('(tanh\([^)]*\))'); subst = "Decimal(\1)"; m = re.sub(p, subst, m)
+    p = re.compile('(asinh\([^)]*\))'); subst = "Decimal(\1)"; m = re.sub(p, subst, m)
+    p = re.compile('(acosh\([^)]*\))'); subst = "Decimal(\1)"; m = re.sub(p, subst, m)
+    p = re.compile('(atanh\([^)]*\))'); subst = "Decimal(\1)"; m = re.sub(p, subst, m)
 
-    p = re.compile(ur'(pow\([^)]*\))'); subst = r"Decimal(\1)"; m = re.sub(p, subst, m)
-    p = re.compile(ur'(abs\([^)]*\))'); subst = r"Decimal(\1)"; m = re.sub(p, subst, m)
-    p = re.compile(ur'(sqrt\([^)]*\))'); subst = r"Decimal(\1)"; m = re.sub(p, subst, m)
-    p = re.compile(ur'(log\([^)]*\))'); subst = r"Decimal(\1)"; m = re.sub(p, subst, m)
-    p = re.compile(ur'(ceil\([^)]*\))'); subst = r"Decimal(\1)"; m = re.sub(p, subst, m)
-    p = re.compile(ur'(floor\([^)]*\))'); subst = r"Decimal(\1)"; m = re.sub(p, subst, m)
-    p = re.compile(ur'(exp\([^)]*\))'); subst = r"Decimal(\1)"; m = re.sub(p, subst, m)
-    p = re.compile(ur'(log10\([^)]*\))'); subst = r"Decimal(\1)"; m = re.sub(p, subst, m)
-    p = re.compile(ur'(degrees\([^)]*\))'); subst = r"Decimal(\1)"; m = re.sub(p, subst, m)
-    p = re.compile(ur'(deg\([^)]*\))'); subst = r"Decimal(\1)"; m = re.sub(p, subst, m)
-    p = re.compile(ur'(radians\([^)]*\))'); subst = r"Decimal(\1)"; m = re.sub(p, subst, m)
-    p = re.compile(ur'(rad\([^)]*\))'); subst = r"Decimal(\1)"; m = re.sub(p, subst, m)
+    p = re.compile('(pow\([^)]*\))'); subst = "Decimal(\1)"; m = re.sub(p, subst, m)
+    p = re.compile('(abs\([^)]*\))'); subst = "Decimal(\1)"; m = re.sub(p, subst, m)
+    p = re.compile('(sqrt\([^)]*\))'); subst = "Decimal(\1)"; m = re.sub(p, subst, m)
+    p = re.compile('(log\([^)]*\))'); subst = "Decimal(\1)"; m = re.sub(p, subst, m)
+    p = re.compile('(ceil\([^)]*\))'); subst = "Decimal(\1)"; m = re.sub(p, subst, m)
+    p = re.compile('(floor\([^)]*\))'); subst = "Decimal(\1)"; m = re.sub(p, subst, m)
+    p = re.compile('(exp\([^)]*\))'); subst = "Decimal(\1)"; m = re.sub(p, subst, m)
+    p = re.compile('(log10\([^)]*\))'); subst = "Decimal(\1)"; m = re.sub(p, subst, m)
+    p = re.compile('(degrees\([^)]*\))'); subst = "Decimal(\1)"; m = re.sub(p, subst, m)
+    p = re.compile('(deg\([^)]*\))'); subst = "Decimal(\1)"; m = re.sub(p, subst, m)
+    p = re.compile('(radians\([^)]*\))'); subst = "Decimal(\1)"; m = re.sub(p, subst, m)
+    p = re.compile('(rad\([^)]*\))'); subst = "Decimal(\1)"; m = re.sub(p, subst, m)
 
     #Converts all remaining numbers into decimals
-    p = re.compile(ur'([:]?\d*\.\d+|\d+)'); subst = r"Decimal(\1)"
+    p = re.compile('([:]?\d*\.\d+|\d+)'); subst = "Decimal(\1)"
     m = re.sub(p, subst, m)
 
     safe_dict = {}
