@@ -208,7 +208,7 @@ def phraseMath(m,modes=""):
 @add_cmd
 def calc(irc, event, args):
     if len(args) > 0:
-        text = " ".join(args)
+        text = " ".join(args[1:])
         """Calculates math"""
         try:
             options = text.split(" ")[-1]
