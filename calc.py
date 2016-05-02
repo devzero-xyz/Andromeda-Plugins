@@ -206,11 +206,6 @@ def phraseMath(m,modes=""):
     return result
     
 @add_cmd
-def calc1(irc,event,args):
-   if len(args) > 0:
-      irc.reply(event, str(sympy.sympify(" ".join(args))))
-
-@add_cmd
 def calc(irc, event, args):
     if len(args) > 0:
         text = " ".join(event.arguments[0].split()[1:])
