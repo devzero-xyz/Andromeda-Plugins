@@ -4,7 +4,7 @@ import utils
 
 from fractions import Fraction
 from decimal import Decimal
-import math, re
+import math, re, sympy
 
 import sys
 sys.setrecursionlimit(20000) #Totally safe BTW (Not being sarcastic)
@@ -204,11 +204,16 @@ def phraseMath(m,modes=""):
         try: return Fraction(result)
         except: return result
     return result
+    
+@add_cmd
+def calc1(irc,event,args):
+   if len(args) > 0:
+      irc.reply(event, str(sympy.sympify(" ".join(args))))
 
 @add_cmd
 def calc(irc, event, args):
     if len(args) > 0:
-        text = " ".join(args[1:])
+        text = " ".join(event.arguments[0].split()[1:])
         """Calculates math"""
         try:
             options = text.split(" ")[-1]
