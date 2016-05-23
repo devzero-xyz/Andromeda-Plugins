@@ -361,7 +361,7 @@ def computeEquation(m,modes=""):
     result = eval(m, {"__builtins__": None}, safe_dict)
     return result
     
-def phraseTextMath(text,user="",hostmask="",exa={}tr):
+def phraseTextMath(text,user="",hostmask="",extra={}):
     showPrec = 5
     showMode = "NONE"
     for i in ["SCI","FRACT"]:
