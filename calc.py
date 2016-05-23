@@ -1,3 +1,5 @@
+#Calc plugin by Bowserinator
+
 from utils import *
 import utils
 
