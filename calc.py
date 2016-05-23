@@ -303,27 +303,27 @@ def computeEquation(m,modes=""):
     m = m.replace("_","").replace("import","").replace("decode","").replace("encode","").replace("open","")
     
     #Change double factorials, ie 5!! -> double_fact(5)
-    p = re.compile(ur'(-?\d+)!!'); subst = r"double_fact(\1)"; m = re.sub(p, subst, m)
-    p = re.compile(ur'\((.?)\)!!'); subst = r"double_fact(\1)"; m = re.sub(p, subst, m)
+    p = re.compile('(-?\d+)!!'); subst = "double_fact(\1)"; m = re.sub(p, subst, m)
+    p = re.compile('\((.?)\)!!'); subst = "double_fact(\1)"; m = re.sub(p, subst, m)
     #Change factorials, ie 5! -> fact(5)
-    p = re.compile(ur'(-?\d+)!'); subst = r"factorial(\1)"; m = re.sub(p, subst, m)
-    p = re.compile(ur'\((.?)\)!'); subst = r"factorial(\1)"; m = re.sub(p, subst, m)
+    p = re.compile('(-?\d+)!'); subst = "factorial(\1)"; m = re.sub(p, subst, m)
+    p = re.compile('\((.?)\)!'); subst = "factorial(\1)"; m = re.sub(p, subst, m)
     
     m = m.replace("||"," or ").replace("|"," or ")
     m = m.replace("&&"," and ").replace("&"," and ")
     
     #Converts e notation, ie 2e9 to 2 * 10**9, because errors and stuff
-    p = re.compile(ur'([:]?\d*\.\d+|\d+)e([-+]?)([-+]?\d*\.\d+|\d+)'); subst = r"\1 * 10**\2\3"
+    p = re.compile('([:]?\d*\.\d+|\d+)e([-+]?)([-+]?\d*\.\d+|\d+)'); subst = "\1 * 10**\2\3"
     m = re.sub(p, subst, m)
     
     #Converts all remaining numbers into numbers
-    p = re.compile(ur'([:]?\d*\.\d+|\d+)'); subst = r"number.Number('\1')"
+    p = re.compile('([:]?\d*\.\d+|\d+)'); subst = "number.Number('\1')"
     m = re.sub(p, subst, m)
     
     #Fix up i
     m = m.replace(")i",")*number.Number(0,1)")
     m = m.replace('in','@')
-    p = re.compile(ur'(?<![a-zA-Z])i'); subst = u"number.Number(0,1)"
+    p = re.compile('(?<![a-zA-Z])i'); subst = "number.Number(0,1)"
     m = re.sub(p, subst, m)
     m = m.replace("@","in")
     
