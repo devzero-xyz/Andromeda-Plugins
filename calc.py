@@ -363,6 +363,9 @@ def computeEquation(m,modes=""):
     safe_dict["number"] = number
     m = m.replace("\x0","")
     print m
+    
+    return m
+    
     result = eval(m, {"__builtins__": None}, safe_dict)
     return result
     
@@ -386,6 +389,8 @@ def phraseTextMath(text,user="",hostmask="",extra={}):
         decimal.getcontext().Emin = -500000
         
         text = computeEquation(text)
+        return text
+        
         if type(text) in (tuple,list):
             text = '['+', '.join( [ (format(a.real, '.{}f'.format(showPrec)) + "+" + format(a.imaginary, '.{}f'.format(showPrec)) + "i").replace("+-","-") for a in text])+']'
         elif type(text) == dict:
