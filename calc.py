@@ -318,6 +318,7 @@ def computeEquation(m,modes=""):
     p = re.compile('([:]?\d*\.\d+|\d+)e([-+]?)([-+]?\d*\.\d+|\d+)'); subst = "\1 * 10**\2\3"
     m = re.sub(p, subst, m)
     
+    m = m.replace("\x01","").replace("\x0f","").replace("\x02","")
     #Converts all remaining numbers into numbers
     p = re.compile('([:]?\d*\.\d+|\d+)'); subst = "number.Number('\1')"
     m = re.sub(p, subst, m)
