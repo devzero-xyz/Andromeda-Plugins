@@ -360,6 +360,7 @@ def computeEquation(m,modes=""):
     safe_dict["degrees"] = degree
     safe_dict["radians"] = radian
     safe_dict["number"] = number
+    m = m.replace("\x01","").replace("\x0f","").replace("\x02","")
     result = eval(m, {"__builtins__": None}, safe_dict)
     return result
     
