@@ -364,6 +364,7 @@ def computeEquation(m,modes=""):
     return result
     
 def phraseTextMath(text,user="",hostmask="",extra={}):
+    text = " ".join(text)
     showPrec = 5
     showMode = "NONE"
     for i in ["SCI","FRACT"]:
