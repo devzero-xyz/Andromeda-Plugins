@@ -362,6 +362,7 @@ def computeEquation(m,modes=""):
     safe_dict["radians"] = radian
     safe_dict["number"] = number
     m = m.replace("\x0","")
+    print m
     result = eval(m, {"__builtins__": None}, safe_dict)
     return result
     
