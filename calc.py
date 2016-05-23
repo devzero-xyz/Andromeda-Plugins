@@ -371,6 +371,10 @@ def computeEquation(m,modes=""):
     
 def phraseTextMath(text,user="",hostmask="",extra={}):
     text = " ".join(text)
+    
+    text = computeEquation(text)
+    return text
+    
     text = text.replace("\x01","").replace("\x0f","").replace("\x02","")
     showPrec = 5
     showMode = "NONE"
@@ -389,7 +393,6 @@ def phraseTextMath(text,user="",hostmask="",extra={}):
         decimal.getcontext().Emin = -500000
         
         text = computeEquation(text)
-        return text
         
         if type(text) in (tuple,list):
             text = '['+', '.join( [ (format(a.real, '.{}f'.format(showPrec)) + "+" + format(a.imaginary, '.{}f'.format(showPrec)) + "i").replace("+-","-") for a in text])+']'
