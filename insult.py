@@ -58,7 +58,7 @@ badwords = [
 ]
 
 @add_cmd
-def extract(irc, event, args):
+def insult(irc, event, args):
   send = "\x02" + args[0] +", \x0f" + random.choice(insultPattern).replace("[REPLACE]",random.choice(badwords).lower())
   irc.reply(event, send)
   
