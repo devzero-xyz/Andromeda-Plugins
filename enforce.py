@@ -52,6 +52,7 @@ def enforce(irc, event, args):
                             unset_modes.append(mode)
             if unrecognised_modes:
                 irc.reply(event, "I could not recognise these modes: {}".format("".join(unrecognised_modes)))
+                
             else:
                 if len(message) >= 4:
                     if not "enforce" in irc.channels[message[1]]:
@@ -60,14 +61,16 @@ def enforce(irc, event, args):
                         "set": set_modes or "",
                         "unset": unset_modes or ""
                     }
+                
                 else:
                     irc.reply(event, "You didn't specify a nick to enforce modes to")
+                    
     except IndexError:
         irc.reply(event, utils.gethelp("enforce"))
         
 def on_mode(irc, conn, event): 
     modes = utils.split_modes(event.arguments)
-    irc.notice("BWBellairs", str(modes))
+    
     if "enforce" in irc.channels[event.target].keys():
         for mode in modes:
             subject = mode.split()[1]
