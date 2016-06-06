@@ -24,7 +24,7 @@ def relay(irc, event, args):
 
 	if args[0] == "add":
 		if len(args) == 1:
-			irc.reply(event, "\x034You need to specify a mode and a two channela to link together. Modes are: ! (Silent), >, < (One Way) and = (Two Way)")
+			irc.reply(event, "\x034You need to specify a mode and a two channels to link together. Modes are: ! (Silent), >, < (One Way) and = (Two Way)")
 		elif len(args) == 2:
 			irc.reply(event, "\x034You need to specify a mode and a another channel to link to. Modes are: ! (Silent), >, < (One Way) and = (Two Way)")
 		elif len(args) == 3:
@@ -35,7 +35,7 @@ def relay(irc, event, args):
 		elif args[2] not in [">", "<", "=", "!"]:
 			irc.reply(event, "\x034Invalid mode of relay. Modes are: ! (Silent), >, < (One Way) and  = (Two Way)")
 		elif args[1] == args[3]:
-			irc.reply(event, "\x034You can't have two of the same channel to relay")
+			irc.reply(event, "\x034You can't relay the same channel.")
 
 		else:
 			success = True
@@ -55,7 +55,7 @@ def relay(irc, event, args):
 					"mode": args[2],
 				})
 
-				irc.reply(event, "\x033Success!\x0f Relay between \"{0}\" and \"{1}\" has been initilaised".format(args[1], args[3]))
+				irc.reply(event, "\x033Success!\x0f Relay between \"{0}\" and \"{1}\" has been initialized".format(args[1], args[3]))
 			else:
 				irc.reply(event, "\x034A connection between those two channels already exists. Maybe you meant to modify it?")
 
