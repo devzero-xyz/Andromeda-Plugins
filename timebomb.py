@@ -6,6 +6,10 @@ import random
 name = "timebomb"
 cmds = ["timebomb", "cut"]
 
+def main(irc):
+    if not "name" in irc.plugins.keys():
+        irc.plugins["timebomb"] = {"exempts": []}
+
 def kick(irc, target, channel, noRemove=False):
     prepare_nicks = []
     reason = "BOOM"
@@ -135,6 +139,13 @@ def timebomb(irc, event, args):
     elif args[0] not in irc.state["channels"][event.target]["names"]:
         irc.reply(event, "That nick isn't in this channel")
         return
+    
+    for item in irc.plugins["timebomb"]["exempts"]:
+        if item.startswith("$a:):
+            account = item[3:]
+            if account = irc.state["users"][args[0]]["account"]:
+                irc.reply(event, "You're not allowed to bomb that person")
+                return
 
     gotop = utils.getop(irc, channel)
     if gotop:
