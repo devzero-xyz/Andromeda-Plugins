@@ -124,7 +124,7 @@ def timebomb(irc, event, args):
         irc.reply(event, "You haven't specified a target")
         return
     
-    elif args[0] == event.source.nick and not canBombSelf or not canBombSelf:
+    elif args[0] == event.source.nick and not canBombSelf:
         irc.reply(event, "You can't bomb yourself!")
         return
 
