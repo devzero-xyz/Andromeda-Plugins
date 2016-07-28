@@ -107,21 +107,24 @@ timeBomb = time_bomb()
 def timebomb(irc, event, args):
     channel = event.target
 
+    if not irc.is_channel(channel):
+        irc.reply(event, "This command has to be performed in a channel")
+        return
+    
+    canBombSelf = False
     if "timebomb" in irc.channels[channel].keys():
         disabled = irc.channels[channel]["timebomb"].get("disabled", True)
         if disabled:
             irc.reply(event, "Sorry: This plugin isn't enabled for this channel")
             return
-
-    if not irc.is_channel(channel):
-        irc.reply(event, "This command has to be performed in a channel")
-        return
+        
+        canBombSelf = irc.channels[channel]["timebomb"].get("canBombSelf", False)
 
     if len(args) == 0:
         irc.reply(event, "You haven't specified a target")
         return
     
-    elif args[0] == event.source.nick:
+    elif args[0] == event.source.nick and canBombSelf:
         irc.reply(event, "You can't bomb yourself!")
         return
 
