@@ -2,13 +2,14 @@ from utils import add_cmd
 import utils
 import threading
 import random
+import time
 
 name = "timebomb"
 cmds = ["timebomb", "cut"]
 
 def main(irc):
-    if not "name" in irc.plugins.keys():
-        irc.plugins["timebomb"] = {"exempts": []}
+    if not name in irc.plugins.keys():
+        irc.plugins["timebomb"] = {"exempts": [], "idle": 300}
 
 def kick(irc, target, channel, noRemove=False):
     prepare_nicks = []
@@ -146,6 +147,17 @@ def timebomb(irc, event, args):
             if account == irc.state["users"][args[0]]["account"]:
                 irc.reply(event, "You're not allowed to bomb that person")
                 return
+
+    allowed = False
+    if "lastmsg" in irc.state["users"][args[0]].keys():
+        if "time" in irc.state["users"][args[0]]["lastmsg"].keys():
+            lasttime = irc.state["users"][args[0]]["lastmsg"]["time"]
+            if lasttime >= int(time.time()) - irc.plugins[name]["idle"]:
+                allowed = True
+
+    if not allowed:
+        irc.reply(event, "That person must of been active recently for you to timebomb them")
+        return
 
     gotop = utils.getop(irc, channel)
     if gotop:
