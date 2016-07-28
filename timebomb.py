@@ -141,9 +141,9 @@ def timebomb(irc, event, args):
         return
     
     for item in irc.plugins["timebomb"]["exempts"]:
-        if item.startswith("$a:):
+        if item.startswith("$a"):
             account = item[3:]
-            if account = irc.state["users"][args[0]]["account"]:
+            if account == irc.state["users"][args[0]]["account"]:
                 irc.reply(event, "You're not allowed to bomb that person")
                 return
 
