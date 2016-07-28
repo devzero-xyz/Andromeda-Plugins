@@ -124,7 +124,7 @@ def timebomb(irc, event, args):
         irc.reply(event, "You haven't specified a target")
         return
     
-    elif args[0] == event.source.nick and canBombSelf:
+    elif args[0] == event.source.nick and not canBombSelf:
         irc.reply(event, "You can't bomb yourself!")
         return
 
@@ -162,7 +162,7 @@ def cut(irc, event, args):
         return
     
     elif args[0] == event.source.nick:
-        irc.reply(event, "You remove the bomb without cutting it!")
+            irc.reply(event, "Try and cut a wire without cutting yourself")
         return
 
     if "timebomb" in irc.channels[channel].keys() and event.source.nick not in irc.channels[channel]["timebomb"]["active"].keys():
