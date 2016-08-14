@@ -75,13 +75,14 @@ class time_bomb(object):
 
             wires.append(colourToAdd)
             iteration += 1
-
+        
+        probabilty = 100 / len(wires) # a * 100 / all (Amount of wires to cut will always be one)
         self.active[channel][target] = threading.Timer(detonationTime, kick, args=(irc, target, channel))
         self.active[channel][target].setDaemon(True)
         self.active[channel][target].start()
         irc.channels[channel]["timebomb"]["active"][target] = {"deployed": event.source.nick, "wires": wires, "toCut": random.choice(wires)}
-        irc.reply(event, "{0}, a bomb was deployed near you. Your only choice is to disarm it. Use \"cut <wire>\" to disarm the bomb. Wires are: {1}. You have {2} seconds until detonation"
-            .format(target, ", ".join(wires), detonationTime))
+        irc.reply(event, "{0}, a bomb was deployed near you. Your only choice is to disarm it. Use \"cut <wire>\" to disarm the bomb. Wires are: {1}. You have {2} seconds until detonation and a {3}% chance of cutting the correct wire."
+            .format(target, ", ".join(wires), detonationTime, str(probability)))
 
     def remove(self, irc, target, channel, colour="", message=True):
         if message:
