@@ -10,6 +10,10 @@ cmds = ["timebomb", "cut"]
 def main(irc):
     if not name in irc.plugins.keys():
         irc.plugins["timebomb"] = {"exempts": [], "idle": 300}
+        
+    for channel in irc.channels.keys():
+        if "timebomb" not in irc.channels[channel].keys():
+            irc.channels[channel]["timebomb"] = {"disabled": True, "active": {}, "limit": 1}
 
 def kick(irc, target, channel, noRemove=False):
     prepare_nicks = []
@@ -38,9 +42,6 @@ class time_bomb(object):
 
     def add(self, irc, event, target):
         channel = event.target
-
-        if "timebomb" not in irc.channels[channel].keys():
-            irc.channels[channel]["timebomb"] = {"disabled": True, "active": {}}
 
         disabled = irc.channels[channel]["timebomb"].get("disabled", True)
         if disabled:
