@@ -76,7 +76,7 @@ class time_bomb(object):
             wires.append(colourToAdd)
             iteration += 1
         
-        probability = 100 / len(wires) # a * 100 / all (Amount of wires to cut will always be one)
+        probability = round(100 / len(wires)) # a * 100 / all (Amount of wires to cut will always be one)
         self.active[channel][target] = threading.Timer(detonationTime, kick, args=(irc, target, channel))
         self.active[channel][target].setDaemon(True)
         self.active[channel][target].start()
