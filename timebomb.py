@@ -93,7 +93,7 @@ class time_bomb(object):
 
             if colour.lower() != irc.channels[channel]["timebomb"]["active"][target]["toCut"].lower():
                 correct = irc.channels[channel]["timebomb"]["active"][target]["toCut"]
-                irc.privmsg(channel, "Wrong Wire! You should of cut {}".format(correct.upper()))
+                irc.privmsg(channel, "Wrong Wire! You should have cut {}".format(correct.upper()))
                 kick(irc, target, channel, noRemove=True)
 
             else:
